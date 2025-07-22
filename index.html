@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>YUNG - Stream & Socials</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+  body {
+    margin: 0;
+    background: #0a001f;
+    color: #d8b9ff;
+    font-family: 'Share Tech Mono', monospace;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  #bg {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -2;
+    background: #0a001f;
+  }
+
+  .container {
+    max-width: 360px;
+    margin: 2rem auto 3rem auto;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  h1 {
+    font-size: 3rem;
+    color: #9b30ff;
+    text-shadow: 0 0 10px #b85cff;
+    margin-bottom: 1rem;
+    user-select: none;
+  }
+
+  .intro-text {
+    font-size: 1rem;
+    margin-bottom: 1.2rem;
+    color: #d580ff;
+    user-select: none;
+  }
+
+  nav {
+    display: flex;
+    justify-content: center;
+    gap: 1.3rem;
+    margin-bottom: 2rem;
+  }
+
+  nav a {
+    color: #d8b9ff;
+    font-size: 2.6rem;
+    filter: drop-shadow(0 0 3px #9b30ff);
+    position: relative;
+    transition:
+      color 0.3s ease,
+      transform 0.3s ease,
+      filter 0.3s ease;
+  }
+
+  /* Re-adding glow + scale + rotation effect */
+  nav a:hover {
+    color: #f0c4ff;
+    transform: scale(1.35) rotate(10deg);
+    filter: drop-shadow(0 0 10px #d580ff);
+  }
+
+  .stream-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  iframe {
+    border-radius: 12px;
+    box-shadow: 0 0 25px #9b30ff;
+    width: 100%;
+    max-width: 360px;
+    height: 215px;
+  }
+
+  .watch-live-btn {
+    padding: 0.8rem 1.2rem;
+    background: #9b30ff;
+    border: none;
+    border-radius: 14px;
+    color: white;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    box-shadow: 0 0 25px #7b00ccbb;
+    transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+    user-select: none;
+    min-width: 110px;
+  }
+
+  .watch-live-btn:hover {
+    background: #d580ff;
+    box-shadow: 0 0 35px #d580ffcc;
+    transform: scale(1.05);
+  }
+
+  .donation-button {
+    display: block;
+    margin: 0 auto 2rem auto;
+    max-width: 360px;
+    padding: 1rem 1.2rem;
+    background: #9b30ff;
+    border-radius: 14px;
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.3rem;
+    text-decoration: none;
+    box-shadow: 0 0 25px #7b00ccbb;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+    user-select: none;
+  }
+
+  .donation-button:hover {
+    background: #d580ff;
+    box-shadow: 0 0 35px #d580ffcc;
+  }
+
+  /* Smaller custom cursor */
+  #cursor {
+    position: fixed;
+    top: 0; left: 0;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #9b30ff;
+    box-shadow: 0 0 6px #9b30ff;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    transition: width 0.15s ease, height 0.15s ease, box-shadow 0.15s ease;
+    z-index: 9999;
+  }
+
+  a:hover ~ #cursor,
+  nav a:hover ~ #cursor,
+  .watch-live-btn:hover ~ #cursor {
+    width: 14px;
+    height: 14px;
+    box-shadow: 0 0 12px #d580ff;
+  }
+</style>
+<script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
+</head>
+<body>
+
+<canvas id="bg"></canvas>
+
+<div class="container" role="main">
+  <h1>YUNG</h1>
+
+  <p class="intro-text">You can access my social links from down below.</p>
+
+  <nav aria-label="Social media links">
+    <a href="https://www.twitch.tv/Yungjoking" target="_blank" rel="noopener noreferrer" aria-label="Twitch">
+      <span class="iconify" data-icon="mdi:twitch" data-inline="false"></span>
+    </a>
+    <a href="https://www.youtube.com/c/@yungjoking" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+      <span class="iconify" data-icon="akar-icons:youtube-fill" data-inline="false"></span>
+    </a>
+    <a href="https://www.aparat.com/Yungjoking" target="_blank" rel="noopener noreferrer" aria-label="Aparat">
+      <span class="iconify" data-icon="simple-icons:aparat" data-inline="false"></span>
+    </a>
+    <a href="https://t.me/CheekyAndShameless" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
+      <span class="iconify" data-icon="akar-icons:telegram-fill" data-inline="false"></span>
+    </a>
+    <a href="https://discord.gg/jJzqBV7rcq" target="_blank" rel="noopener noreferrer" aria-label="Discord">
+      <span class="iconify" data-icon="akar-icons:discord-fill" data-inline="false"></span>
+    </a>
+    <a href="https://x.com/YUNG_JOKING" target="_blank" rel="noopener noreferrer" aria-label="X Twitter">
+      <span class="iconify" data-icon="akar-icons:twitter-fill" data-inline="false"></span>
+    </a>
+    <a href="https://instagram.com/Yung_joking" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+      <span class="iconify" data-icon="akar-icons:instagram-fill" data-inline="false"></span>
+    </a>
+  </nav>
+
+  <div class="stream-wrapper" role="region" aria-label="Live stream and watch button" style="justify-content: center;">
+    <iframe 
+      src="https://www.aparat.com/embed/live/Yungjoking" 
+      allowfullscreen 
+      title="YUNG Live Stream"
+      loading="lazy"
+    ></iframe>
+    <button class="watch-live-btn" onclick="window.open('https://www.aparat.com/Yungjoking/live', '_blank')" aria-label="Watch live stream">
+      Watch Live
+    </button>
+  </div>
+
+  <a href="https://reymit.ir/yungjoking" target="_blank" rel="noopener noreferrer" class="donation-button" aria-label="Donate to YUNG">
+    Support YUNG
+  </a>
+</div>
+
+<div id="cursor"></div>
+
+<script>
+  // Particle animation
+  const canvas = document.getElementById('bg');
+  const ctx = canvas.getContext('2d');
+  let width, height;
+  let particles = [];
+  const maxParticles = 80;
+  const maxDistance = 140;
+
+  function resize() {
+    width = window.innerWidth;
+    height = window.innerHeight;
+    canvas.width = width;
+    canvas.height = height;
+  }
+
+  class Particle {
+    constructor() {
+      this.x = Math.random() * width;
+      this.y = Math.random() * height;
+      this.vx = (Math.random() - 0.5) * 0.3;
+      this.vy = (Math.random() - 0.5) * 0.3;
+      this.radius = Math.random() * 1.5 + 0.6;
+      this.alpha = 0.6 + Math.random() * 0.4;
+    }
+
+    update() {
+      this.x += this.vx;
+      this.y += this.vy;
+
+      if (this.x < 0 || this.x > width) this.vx *= -1;
+      if (this.y < 0 || this.y > height) this.vy *= -1;
+    }
+
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(155, 48, 255, ${this.alpha})`;
+      ctx.fill();
+    }
+  }
+
+  function connectParticles() {
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        let dx = particles[i].x - particles[j].x;
+        let dy = particles[i].y - particles[j].y;
+        let dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < maxDistance) {
+          ctx.strokeStyle = `rgba(155, 48, 255, ${(maxDistance - dist) / maxDistance * 0.25})`;
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, width, height);
+    particles.forEach(p => {
+      p.update();
+      p.draw();
+    });
+    connectParticles();
+    requestAnimationFrame(animate);
+  }
+
+  function initParticles() {
+    particles = [];
+    for (let i = 0; i < maxParticles; i++) {
+      particles.push(new Particle());
+    }
+  }
+
+  resize();
+  window.addEventListener('resize', resize);
+  initParticles();
+  animate();
+
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  window.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+  });
+</script>
+
+</body>
+</html>
