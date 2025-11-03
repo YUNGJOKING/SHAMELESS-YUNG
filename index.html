@@ -66,7 +66,6 @@
       filter 0.3s ease;
   }
 
-  /* Re-adding glow + scale + rotation effect */
   nav a:hover {
     color: #f0c4ff;
     transform: scale(1.35) rotate(10deg);
@@ -85,9 +84,30 @@
   iframe {
     border-radius: 12px;
     box-shadow: 0 0 25px #9b30ff;
-    width: 100%;
-    max-width: 360px;
-    height: 215px;
+  }
+
+  .twitch-embed-container {
+    aspect-ratio: 16 / 9;
+    max-width: none;
+    min-width: 100% !important;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 25px #9b30ff;
+  }
+
+  .powered-by {
+    font-size: 0.7rem;
+    margin-top: 0.5rem;
+    opacity: 0.6;
+  }
+
+  .powered-by a {
+    color: #d580ff;
+    text-decoration: none;
+  }
+
+  .powered-by a:hover {
+    text-decoration: underline;
   }
 
   .watch-live-btn {
@@ -132,7 +152,6 @@
     box-shadow: 0 0 35px #d580ffcc;
   }
 
-  /* Smaller custom cursor */
   #cursor {
     position: fixed;
     top: 0; left: 0;
@@ -190,17 +209,25 @@
     </a>
   </nav>
 
+  <!-- ✅ Fixed Twitch Embed -->
   <div class="stream-wrapper" role="region" aria-label="Live stream and watch button" style="justify-content: center;">
-    <iframe 
-      src="https://embed.twitch.tv/embed/yungjoking.js" 
-      allowfullscreen 
-      title="YUNG Live Stream"
-      loading="lazy"
-    ></iframe>
+    <div class="twitch-embed-container">
+      <iframe
+        src="https://player.twitch.tv/?channel=yungjoking&parent=yungjoking.github.io&autoplay=false&muted=false&time=0s"
+        width="100%"
+        height="100%"
+        frameborder="0"
+        allowfullscreen>
+      </iframe>
+    </div>
+    <p class="powered-by">
+      Powered by <a href="https://www.streamweasels.com/tools/twitch-embed-code-generator/" target="_blank">StreamWeasels Twitch Embed Generator</a>
+    </p>
     <button class="watch-live-btn" onclick="window.open('https://www.twitch.tv/yungjoking', '_blank')" aria-label="Watch live stream">
       Watch Live
     </button>
   </div>
+  <!-- ✅ End of Fixed Embed -->
 
   <a href="https://reymit.ir/yungjoking" target="_blank" rel="noopener noreferrer" class="donation-button" aria-label="Donate to YUNG">
     Support YUNG
@@ -210,7 +237,6 @@
 <div id="cursor"></div>
 
 <script>
-  // Particle animation
   const canvas = document.getElementById('bg');
   const ctx = canvas.getContext('2d');
   let width, height;
@@ -234,15 +260,12 @@
       this.radius = Math.random() * 1.5 + 0.6;
       this.alpha = 0.6 + Math.random() * 0.4;
     }
-
     update() {
       this.x += this.vx;
       this.y += this.vy;
-
       if (this.x < 0 || this.x > width) this.vx *= -1;
       if (this.y < 0 || this.y > height) this.vy *= -1;
     }
-
     draw() {
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
@@ -271,19 +294,14 @@
 
   function animate() {
     ctx.clearRect(0, 0, width, height);
-    particles.forEach(p => {
-      p.update();
-      p.draw();
-    });
+    particles.forEach(p => { p.update(); p.draw(); });
     connectParticles();
     requestAnimationFrame(animate);
   }
 
   function initParticles() {
     particles = [];
-    for (let i = 0; i < maxParticles; i++) {
-      particles.push(new Particle());
-    }
+    for (let i = 0; i < maxParticles; i++) particles.push(new Particle());
   }
 
   resize();
@@ -291,7 +309,6 @@
   initParticles();
   animate();
 
-  // Custom cursor
   const cursor = document.getElementById('cursor');
   window.addEventListener('mousemove', e => {
     cursor.style.left = e.clientX + 'px';
