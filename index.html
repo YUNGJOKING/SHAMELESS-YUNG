@@ -76,29 +76,34 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     gap: 12px;
     margin-bottom: 1.5rem;
-    flex-wrap: wrap;
   }
 
-  iframe {
-    border-radius: 12px;
-    box-shadow: 0 0 25px #9b30ff;
-  }
-
+  /* Responsive Twitch container with same size */
   .twitch-embed-container {
-    aspect-ratio: 16 / 9;
-    max-width: none;
-    min-width: 100% !important;
+    position: relative;
+    width: 100%;
+    max-width: 360px;
     border-radius: 12px;
-    overflow: hidden;
     box-shadow: 0 0 25px #9b30ff;
+    overflow: hidden;
+    background: #080017;
+    aspect-ratio: 16/9;
+  }
+
+  .twitch-embed-container iframe {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: none;
   }
 
   .powered-by {
     font-size: 0.7rem;
-    margin-top: 0.5rem;
     opacity: 0.6;
+    margin-top: 4px;
   }
 
   .powered-by a {
@@ -209,16 +214,15 @@
     </a>
   </nav>
 
-  <!-- ✅ Fixed Twitch Embed -->
-  <div class="stream-wrapper" role="region" aria-label="Live stream and watch button" style="justify-content: center;">
+  <!-- Fixed Twitch Embed -->
+  <div class="stream-wrapper" role="region" aria-label="Live stream and watch button">
     <div class="twitch-embed-container">
       <iframe
-        src="https://player.twitch.tv/?channel=yungjoking&parent=yungjoking.github.io&autoplay=false&muted=false&time=0s"
-        width="100%"
-        height="100%"
-        frameborder="0"
-        allowfullscreen>
-      </iframe>
+        src="https://player.twitch.tv/?channel=yungjoking&parent=yungjoking.github.io&autoplay=false&muted=false"
+        allowfullscreen
+        title="YUNG Live Stream"
+        loading="lazy"
+      ></iframe>
     </div>
     <p class="powered-by">
       Powered by <a href="https://www.streamweasels.com/tools/twitch-embed-code-generator/" target="_blank">StreamWeasels Twitch Embed Generator</a>
@@ -227,7 +231,7 @@
       Watch Live
     </button>
   </div>
-  <!-- ✅ End of Fixed Embed -->
+  <!-- End Twitch Embed -->
 
   <a href="https://reymit.ir/yungjoking" target="_blank" rel="noopener noreferrer" class="donation-button" aria-label="Donate to YUNG">
     Support YUNG
@@ -260,12 +264,15 @@
       this.radius = Math.random() * 1.5 + 0.6;
       this.alpha = 0.6 + Math.random() * 0.4;
     }
+
     update() {
       this.x += this.vx;
       this.y += this.vy;
+
       if (this.x < 0 || this.x > width) this.vx *= -1;
       if (this.y < 0 || this.y > height) this.vy *= -1;
     }
+
     draw() {
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
@@ -294,14 +301,19 @@
 
   function animate() {
     ctx.clearRect(0, 0, width, height);
-    particles.forEach(p => { p.update(); p.draw(); });
+    particles.forEach(p => {
+      p.update();
+      p.draw();
+    });
     connectParticles();
     requestAnimationFrame(animate);
   }
 
   function initParticles() {
     particles = [];
-    for (let i = 0; i < maxParticles; i++) particles.push(new Particle());
+    for (let i = 0; i < maxParticles; i++) {
+      particles.push(new Particle());
+    }
   }
 
   resize();
