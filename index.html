@@ -60,10 +60,7 @@
     font-size: 2.6rem;
     filter: drop-shadow(0 0 3px #9b30ff);
     position: relative;
-    transition:
-      color 0.3s ease,
-      transform 0.3s ease,
-      filter 0.3s ease;
+    transition: color 0.3s ease, transform 0.3s ease, filter 0.3s ease;
   }
 
   nav a:hover {
@@ -74,14 +71,13 @@
 
   .stream-wrapper {
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
+    align-items: center;
     gap: 12px;
     margin-bottom: 1.5rem;
   }
 
-  /* Responsive Twitch container with same size */
+  /* Responsive Twitch container — same visual space but resizes fluidly */
   .twitch-embed-container {
     position: relative;
     width: 100%;
@@ -90,14 +86,23 @@
     box-shadow: 0 0 25px #9b30ff;
     overflow: hidden;
     background: #080017;
-    aspect-ratio: 16/9;
+  }
+
+  /* Keep correct proportions using padding-bottom method */
+  .twitch-embed-container::before {
+    content: "";
+    display: block;
+    padding-bottom: 60%; /* Controls height — same visual ratio as before */
   }
 
   .twitch-embed-container iframe {
     position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     border: none;
+    object-fit: cover;
   }
 
   .powered-by {
@@ -187,34 +192,19 @@
 
 <div class="container" role="main">
   <h1>YUNG</h1>
-
   <p class="intro-text">You can access my social links from down below.</p>
 
   <nav aria-label="Social media links">
-    <a href="https://www.twitch.tv/Yungjoking" target="_blank" rel="noopener noreferrer" aria-label="Twitch">
-      <span class="iconify" data-icon="mdi:twitch" data-inline="false"></span>
-    </a>
-    <a href="https://www.youtube.com/@yungjoking" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-      <span class="iconify" data-icon="akar-icons:youtube-fill" data-inline="false"></span>
-    </a>
-    <a href="https://www.aparat.com/Yungjoking" target="_blank" rel="noopener noreferrer" aria-label="Aparat">
-      <span class="iconify" data-icon="simple-icons:aparat" data-inline="false"></span>
-    </a>
-    <a href="https://t.me/CheekyAndShameless" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
-      <span class="iconify" data-icon="akar-icons:telegram-fill" data-inline="false"></span>
-    </a>
-    <a href="https://discord.gg/jJzqBV7rcq" target="_blank" rel="noopener noreferrer" aria-label="Discord">
-      <span class="iconify" data-icon="akar-icons:discord-fill" data-inline="false"></span>
-    </a>
-    <a href="https://x.com/YUNG_JOKING" target="_blank" rel="noopener noreferrer" aria-label="X Twitter">
-      <span class="iconify" data-icon="akar-icons:twitter-fill" data-inline="false"></span>
-    </a>
-    <a href="https://instagram.com/Yung_joking" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-      <span class="iconify" data-icon="akar-icons:instagram-fill" data-inline="false"></span>
-    </a>
+    <a href="https://www.twitch.tv/Yungjoking" target="_blank" rel="noopener noreferrer" aria-label="Twitch"><span class="iconify" data-icon="mdi:twitch"></span></a>
+    <a href="https://www.youtube.com/@yungjoking" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><span class="iconify" data-icon="akar-icons:youtube-fill"></span></a>
+    <a href="https://www.aparat.com/Yungjoking" target="_blank" rel="noopener noreferrer" aria-label="Aparat"><span class="iconify" data-icon="simple-icons:aparat"></span></a>
+    <a href="https://t.me/CheekyAndShameless" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><span class="iconify" data-icon="akar-icons:telegram-fill"></span></a>
+    <a href="https://discord.gg/jJzqBV7rcq" target="_blank" rel="noopener noreferrer" aria-label="Discord"><span class="iconify" data-icon="akar-icons:discord-fill"></span></a>
+    <a href="https://x.com/YUNG_JOKING" target="_blank" rel="noopener noreferrer" aria-label="X Twitter"><span class="iconify" data-icon="akar-icons:twitter-fill"></span></a>
+    <a href="https://instagram.com/Yung_joking" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><span class="iconify" data-icon="akar-icons:instagram-fill"></span></a>
   </nav>
 
-  <!-- Fixed Twitch Embed -->
+  <!-- Fixed and Responsive Twitch Embed -->
   <div class="stream-wrapper" role="region" aria-label="Live stream and watch button">
     <div class="twitch-embed-container">
       <iframe
@@ -264,15 +254,12 @@
       this.radius = Math.random() * 1.5 + 0.6;
       this.alpha = 0.6 + Math.random() * 0.4;
     }
-
     update() {
       this.x += this.vx;
       this.y += this.vy;
-
       if (this.x < 0 || this.x > width) this.vx *= -1;
       if (this.y < 0 || this.y > height) this.vy *= -1;
     }
-
     draw() {
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
@@ -301,10 +288,7 @@
 
   function animate() {
     ctx.clearRect(0, 0, width, height);
-    particles.forEach(p => {
-      p.update();
-      p.draw();
-    });
+    particles.forEach(p => { p.update(); p.draw(); });
     connectParticles();
     requestAnimationFrame(animate);
   }
